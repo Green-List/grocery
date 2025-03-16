@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_application_1",
+            "cwd": "Users\\Admin\\Downloads\\flutter_application_1",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "flutter_application_1 (profile mode)",
+            "cwd": "Users\\Admin\\Downloads\\flutter_application_1",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_application_1 (release mode)",
+            "cwd": "Users\\Admin\\Downloads\\flutter_application_1",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "greenlist",
+            "cwd": "Users\\Admin\\grocery-1\\greenlist",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "greenlist (profile mode)",
+            "cwd": "Users\\Admin\\grocery-1\\greenlist",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "greenlist (release mode)",
+            "cwd": "Users\\Admin\\grocery-1\\greenlist",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (lib/main.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "greenlist",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "Flutter (lib/main.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "greenlist",
+            "program": "lib/main.dart"
+        }
+    ]
+}
