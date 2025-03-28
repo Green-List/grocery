@@ -11,13 +11,13 @@ class GreenListApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HomePage(),
     );
   }
 }
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
