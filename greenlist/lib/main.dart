@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'signup_screen.dart'; // Import the SignUpScreen
 
 void main() {
   runApp(GreenListApp());
@@ -11,13 +12,13 @@ class GreenListApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HomePage(),
     );
   }
 }
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
             Text(
               "Green List",
               style: TextStyle(
-                fontSize: screenWidth * 0.1, // Scalable font size
+                fontSize: screenWidth * 0.1,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -47,10 +48,20 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             CustomButton(
-                text: "Login", onPressed: () => print("Login Pressed")),
+              text: "Login", 
+              onPressed: () => print("Login Pressed"),
+            ),
             SizedBox(height: 20),
             CustomButton(
-                text: "Sign Up", onPressed: () => print("Sign Up Pressed")),
+              text: "Sign Up",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpScreen()),
+                );
+                
+              },
+            ),
           ],
         ),
       ),
@@ -75,8 +86,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: Colors.white, width: 2),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child: Text(
           text,
