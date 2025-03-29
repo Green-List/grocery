@@ -19,7 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.green[500],
+      backgroundColor: Colors.green[500], //Test
       appBar: AppBar(
         backgroundColor: Colors.green[500], 
         elevation: 0, // Removes the shadow
