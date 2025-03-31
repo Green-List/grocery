@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'signup_screen.dart'; // Import the SignUpScreen
+import 'login_screen.dart'; // Import Login screen
 
 void main() {
   runApp(GreenListApp());
@@ -49,7 +50,12 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 30),
             CustomButton(
               text: "Login", 
-              onPressed: () => print("Login Pressed"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
             ),
             SizedBox(height: 20),
             CustomButton(
