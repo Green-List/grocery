@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.green[400], // Green background
+      backgroundColor: Colors.green[500], // Green background
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
