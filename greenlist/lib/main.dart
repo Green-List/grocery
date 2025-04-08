@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'signup_screen.dart'; // Import the SignUpScreen
 import 'login_screen.dart'; // Import Login screen
 import 'lists_screen.dart'; // Import List screen
-
 void main() {
   runApp(GreenListApp());
 }

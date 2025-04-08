@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +7,7 @@ class MainApp extends StatelessWidget {
       home: AccountScreen(),
     );
   }
-}
+
 
 class AccountScreen extends StatelessWidget {
   @override
@@ -41,9 +34,9 @@ Widget build(BuildContext context) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Username: John Doe", style: TextStyle(color: Colors.white, fontSize: 20)),
+          Text("Username: John Doe", style: TextStyle(color: Colors.white, fontSize: 20)), //Replace with username from firebase database
           SizedBox(height: 20),
-          Text("Email: JDoe@examplemail.com", style: TextStyle(color: Colors.white70)),
+          Text("Email: JDoe@examplemail.com", style: TextStyle(color: Colors.white70)), //Replace with email from firebase database
           SizedBox(height: 40),
           ElevatedButton.icon(
             onPressed: () {
