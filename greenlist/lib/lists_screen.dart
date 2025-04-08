@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'account_screen.dart';
-void main() {
-  runApp(MyApp());
-}
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -260,7 +258,7 @@ class _ListsScreenState extends State<ListsScreen> {
 
 class GroceryListScreen extends StatefulWidget {
   final String listName;
-  GroceryListScreen({required this.listName});
+  const GroceryListScreen({super.key, required this.listName});
 
   @override
   _GroceryListScreenState createState() => _GroceryListScreenState();
@@ -374,6 +372,8 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
 }
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

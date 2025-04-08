@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'signup_screen.dart'; // Import the SignUpScreen
 import 'login_screen.dart'; // Import Login screen
 import 'lists_screen.dart'; // Import List screen
+
 void main() {
   runApp(GreenListApp());
 }
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             CustomButton(
-              text: "Login", 
+              text: "Login",
               onPressed: () {
                 Navigator.push(
                   context,
@@ -65,7 +66,6 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => SignUpScreen()),
                 );
-                
               },
             ),
           ],
@@ -92,7 +92,8 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: Colors.white, width: 2),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child: Text(
           text,
