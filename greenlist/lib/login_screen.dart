@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/my_textfield.dart';
+import 'package:greenlist/lists_screen.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -65,7 +66,12 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 30),
             CustomButton(
                 text: "Sign In",
-                onPressed: () => print("Login button Pressed")),
+                onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },),
           ],
         ),
       ),

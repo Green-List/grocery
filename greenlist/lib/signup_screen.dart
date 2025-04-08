@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenlist/lists_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -71,18 +72,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
             CustomButton(
               text: "Sign Up",
               onPressed: () {
-                if (passwordController.text == confirmPasswordController.text) {
-                  print("Name: ${nameController.text}");
-                  print("Password: ${passwordController.text}");
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Passwords do not match!"),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
               },
+              // onPressed: () {
+              //   if (passwordController.text == confirmPasswordController.text) {
+              //     print("Name: ${nameController.text}");
+              //     print("Password: ${passwordController.text}");
+              //   } else {
+              //     ScaffoldMessenger.of(context).showSnackBar(
+              //       SnackBar(
+              //         content: Text("Passwords do not match!"),
+              //         backgroundColor: Colors.red,
+              //       ),
+              //     );
+              //   }
+              // },
             ),
           ],
         ),
