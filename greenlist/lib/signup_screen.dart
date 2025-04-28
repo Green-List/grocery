@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:greenlist/lists_screen.dart';
 
@@ -15,6 +16,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: nameController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      print(userCredential.user?.uid); //user id
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -22,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: Colors.green[500], //Test
       appBar: AppBar(
-        backgroundColor: Colors.green[500], 
+        backgroundColor: Colors.green[500],
         elevation: 0, // Removes the shadow
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white), // Back button icon
@@ -64,32 +78,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 20),
 
             // Confirm Password TextField
-            _buildTextField(confirmPasswordController, "Confirm your password", true, isConfirm: true),
+            _buildTextField(
+                confirmPasswordController, "Confirm your password", true,
+                isConfirm: true),
 
             SizedBox(height: 20),
 
             // Sign Up Button with Password Validation
-            CustomButton(
+           CustomButton(
               text: "Sign Up",
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
+              onPressed: () async {
+                if (nameController.text.trim().isEmpty ||
+                    passwordController.text.trim().isEmpty ||
+                    confirmPasswordController.text.trim().isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("All fields are required!"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
+
+                if (passwordController.text != confirmPasswordController.text) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Passwords do not match!"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
+
+                try {
+                  await createUserWithEmailAndPassword();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Sign up failed: ${e.toString()}"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
               },
-              // onPressed: () {
-              //   if (passwordController.text == confirmPasswordController.text) {
-              //     print("Name: ${nameController.text}");
-              //     print("Password: ${passwordController.text}");
-              //   } else {
-              //     ScaffoldMessenger.of(context).showSnackBar(
-              //       SnackBar(
-              //         content: Text("Passwords do not match!"),
-              //         backgroundColor: Colors.red,
-              //       ),
-              //     );
-              //   }
-              // },
             ),
           ],
         ),
@@ -98,12 +133,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   // Custom text field builder
-  Widget _buildTextField(TextEditingController controller, String label, bool isPassword, {bool isConfirm = false}) {
+  Widget _buildTextField(
+      TextEditingController controller, String label, bool isPassword,
+      {bool isConfirm = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
         controller: controller,
-        obscureText: isPassword ? (isConfirm ? !_isConfirmPasswordVisible : !_isPasswordVisible) : false,
+        obscureText: isPassword
+            ? (isConfirm ? !_isConfirmPasswordVisible : !_isPasswordVisible)
+            : false,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           labelText: label,
@@ -120,8 +159,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ? IconButton(
                   icon: Icon(
                     isConfirm
-                        ? (_isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off)
-                        : (_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                        ? (_isConfirmPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off)
+                        : (_isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off),
                     color: Colors.white70,
                   ),
                   onPressed: () {
@@ -158,7 +201,8 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: Colors.white, width: 2),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child: Text(
           text,

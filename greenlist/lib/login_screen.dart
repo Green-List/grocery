@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/my_textfield.dart';
 import 'package:greenlist/lists_screen.dart';
@@ -8,13 +9,24 @@ class LoginPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
+  Future<void> loginUserWithEmailAndPassword() async {
+    try {
+      final userCredential = FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: usernameController.text.trim(),
+          password: passwordController.text.trim());
+      print(userCredential);
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.green[500],
-       appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.green[500],
         elevation: 0, // Removes the shadow
         leading: IconButton(
@@ -65,13 +77,35 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             CustomButton(
-                text: "Sign In",
-                onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },),
+              text: "Sign In",
+              onPressed: () async {
+                if (usernameController.text.trim().isEmpty ||
+                    passwordController.text.trim().isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Both fields are required!"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
+
+                try {
+                  await loginUserWithEmailAndPassword();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Sign in failed: ${e.toString()}"),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
